@@ -107,18 +107,6 @@ public class DoubleLinkedList {
 		}
 	}
 
-	public boolean find(String s) {
-		Node t = header.next;
-		while (t.next != null) {
-			if (t.value == s) {
-				return true;
-			}
-			t = t.next;
-		}
-
-		return false;
-	}
-
 	public Node findFirst() {
 		if (header.next == null)
 			return null;
@@ -138,6 +126,18 @@ public class DoubleLinkedList {
 		}
 	}
 
+	public boolean find(String s) {
+		Node t = header.next;
+		while (t.next != null) {
+			if (t.value == s) {
+				return true;
+			}
+			t = t.next;
+		}
+
+		return false;
+	}
+
 	public int findIndex(String s) {
 		int counter = 0;
 		Node t = header.next;
@@ -155,23 +155,86 @@ public class DoubleLinkedList {
 		if (header.next != null) {
 			header.next = header.next.next;
 			header.next.previous = header;
-			return 
-		}
+			return toString();
+		} else
+			return null;
 	}
 
+	public String removeLast() {
+		if (header.next != null) {
+			Node t = header.next;
+			while (t.next != null) {
+				t = t.next;
+			}
+			t.previous.next = null;
+			return toString();
+		} else
+			return null;
+	}
+
+	public boolean remove(int index) {
+		if (index > 0 && index < size()) {
+			if (header.next != null) {
+				Node t = header.next;
+				while (index != 0) {
+					t = t.next;
+					index--;
+				}
+				t.next.previous = t.previous;
+				t.previous.next = t.next;
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean remove(String element) {
+		Node t = header.next;
+		while (t.next != null) {
+			if (t.value == element) {
+				t.next.previous = t.previous;
+				t.previous.next = t.next;
+				return true;
+			}
+			t = t.next;
+		}
+
+		return false;
+	}
 	public static void main(String[] args) {
 		DoubleLinkedList list = new DoubleLinkedList();
-		list.addFirst("Bob");
+		list.addFirst("John");
 		list.addLast("Harry");
 		list.addLast("Steve");
-		list.addFirst("Bob1");
-		list.addFirst("Bob0");
-		int t = list.findIndex("SS");
-		System.out.println(t);
-
-		list.insert("Bob3", 5);
-		// System.out.println(list.toString());
+		list.addFirst("Bob");
+		list.addFirst("Alice");
+		list.insert("Nina", 5);
 		System.out.println(list.size() + ": " + list.toString());
+		
+		Node first =list.findFirst();
+		System.out.println("first is: "+first.value);
+
+		Node last =list.findLast();
+		System.out.println("last is: "+last.value);
+		
+		System.out.println(list.find("Bob"));
+		System.out.println(list.find("Sara"));
+
+		System.out.println(list.findIndex("Bob"));
+		System.out.println(list.findIndex("Sara"));
+
+		System.out.println(list.removeFirst());
+		System.out.println(list.removeLast());
+		
+		System.out.println(list.remove(4));
+		System.out.println(list.remove(-1));
+		System.out.println(list.remove(100));
+		
+		System.out.println(list.remove("Bob"));
+		System.out.println(list.remove("Alex"));
+
+
+
+
 
 	}
 
