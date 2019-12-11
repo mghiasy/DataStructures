@@ -187,6 +187,7 @@ public class DoubleLinkedList {
 		}
 		return false;
 	}
+
 	public boolean remove(String element) {
 		Node t = header.next;
 		while (t.next != null) {
@@ -200,6 +201,90 @@ public class DoubleLinkedList {
 
 		return false;
 	}
+
+	public String findMin() {
+		if (header.next != null) {
+			Node min = header.next;
+			Node t = min;
+			while (t.next != null) {
+				t = t.next;
+				if (min.value.compareTo(t.value) > 0) {
+					min = t;
+				}
+			}
+			return min.value;
+		}
+		return null;
+	}
+
+	public String findMax() {
+		if (header.next != null) {
+			Node max = header.next;
+			Node t = max;
+			while (t.next != null) {
+				t = t.next;
+				if (max.value.compareTo(t.value) < 0) {
+					max = t;
+				}
+			}
+			return max.value;
+		}
+		return null;
+	}
+
+	public void sort() {
+		//Implement
+		
+//		if (size() >= 1) {
+//			///1
+//			for (Node i = header.next; i != null; i = i.next) {
+//				Node min=i;
+//				for(Node j=i;j!= null;j=j.next){
+//					Node t=j;
+//					if (min.value.compareTo(t.value) > 0) {
+//						//swap t and min
+//						Node temp = min;
+//						min.next = t.next;
+//						min.previous = t.previous;
+//						t.next = temp.next;
+//						t.previous= temp.previous;
+//					}
+//				}
+//			}
+//			
+//			
+//			///2
+//			//	create new linked list
+//			DoubleLinkedList list2 = new DoubleLinkedList();
+//			String min="";
+//			for (Node i = header.next; i != null; i = i.next) {
+//				min=list2.findMin();
+//				list2.addLast(min);
+//			}
+//		}
+	}
+	public String recurMax() {
+		if (header.next != null) {
+			//implement
+		}
+		return null;
+	}
+	public Node findMinNode() {
+		if (header.next != null) {
+			Node min = header.next;
+			Node t = min;
+			while (t.next != null) {
+				t = t.next;
+				if (min.value.compareTo(t.value) > 0) {
+					min = t;
+				}
+			}
+			return min;
+		}
+		return null;
+	}
+
+//********************************8
 	public static void main(String[] args) {
 		DoubleLinkedList list = new DoubleLinkedList();
 		list.addFirst("John");
@@ -208,14 +293,15 @@ public class DoubleLinkedList {
 		list.addFirst("Bob");
 		list.addFirst("Alice");
 		list.insert("Nina", 5);
-		System.out.println(list.size() + ": " + list.toString());
-		
-		Node first =list.findFirst();
-		System.out.println("first is: "+first.value);
 
-		Node last =list.findLast();
-		System.out.println("last is: "+last.value);
-		
+		System.out.println(list.size() + ": " + list.toString());
+
+		Node first = list.findFirst();
+		System.out.println("first is: " + first.value);
+
+		Node last = list.findLast();
+		System.out.println("last is: " + last.value);
+
 		System.out.println(list.find("Bob"));
 		System.out.println(list.find("Sara"));
 
@@ -224,17 +310,23 @@ public class DoubleLinkedList {
 
 		System.out.println(list.removeFirst());
 		System.out.println(list.removeLast());
-		
+
 		System.out.println(list.remove(4));
 		System.out.println(list.remove(-1));
 		System.out.println(list.remove(100));
-		
-		System.out.println(list.remove("Bob"));
+
+		// System.out.println(list.remove("Bob"));
 		System.out.println(list.remove("Alex"));
+		list.addLast("AAA");
+		// list.addLast("zzz");
 
+		System.out.println(list.size() + ": " + list.toString());
 
-
-
+		System.out.println("Min is" + list.findMin());
+		System.out.println("Max is" + list.findMax());
+		
+		list.sort();
+		System.out.println("after sort : "+ list.toString());
 
 	}
 
