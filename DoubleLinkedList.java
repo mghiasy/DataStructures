@@ -235,22 +235,19 @@ public class DoubleLinkedList {
 	public void sort() {
 		//Implement
 		
-//		if (size() >= 1) {
-//			///1
-//			for (Node i = header.next; i != null; i = i.next) {
-//				Node min=i;
-//				for(Node j=i;j!= null;j=j.next){
-//					Node t=j;
-//					if (min.value.compareTo(t.value) > 0) {
-//						//swap t and min
-//						Node temp = min;
-//						min.next = t.next;
-//						min.previous = t.previous;
-//						t.next = temp.next;
-//						t.previous= temp.previous;
-//					}
-//				}
-//			}
+		if (size() >= 1) {
+			///Selection sort
+			for (Node i = header.next; i != null; i = i.next) {
+				for(Node j=i.next;j!= null;j=j.next){
+					if (i.value.compareTo(j.value) > 0) {
+						//swap t and min
+						String temp = i.value;
+						i.value=j.value;
+						j.value=temp;
+					}
+				}
+			}
+		}
 //			
 //			
 //			///2
@@ -263,6 +260,7 @@ public class DoubleLinkedList {
 //			}
 //		}
 	}
+
 	public String recurMax() {
 		if (header.next != null) {
 			//implement
