@@ -260,7 +260,29 @@ public class DoubleLinkedList {
 //			}
 //		}
 	}
+	public void minSort(){
+		Node t;
+		for(Node i= header.next;i!= null;i=i.next) {
+			t=minNode(i);
+			swap(i,t);
+		}
+	}
+	void swap(Node n1, Node n2){
 
+		String temp= n1.value;
+		n1.value = n2.value;
+		n2.value=temp;
+	}
+
+	public Node minNode(Node n){
+		Node min = n;
+		for(Node t= min.next; t!= null;t=t.next) {
+			if(min.value.compareTo(t.value)>0)
+				min= t;
+		}
+		return min;		
+	}
+	
 	public String recurMax() {
 		if (header.next != null) {
 			//implement
@@ -323,8 +345,8 @@ public class DoubleLinkedList {
 		System.out.println("Min is" + list.findMin());
 		System.out.println("Max is" + list.findMax());
 		
-		list.sort();
-		System.out.println("after sort : "+ list.toString());
+		list.minSort();
+		System.out.println("after minSort : "+ list.toString());
 
 	}
 
